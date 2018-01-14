@@ -1,0 +1,37 @@
+kayttaja->selain:
+note left of selain
+kayttaja kirjottaa tekstikenttään jotain
+ja painaa tallennusnappulaa
+end note
+selain->palvelin: POST /new_note
+note left of palvelin
+ Pyynnön rungossa on käyttäjän 
+ kirjottama teksti 
+end note
+palvelin->selain: status 302 Found
+note left of palvelin
+ Uudelleenohjauspyyntö päivittää sivun
+end note
+
+selain->palvelin: GET /notes
+note left of palvelin
+  muodostetaan HTML missä olemassaolevien
+  muistiinpanojen lukumäärä päivitettynä
+end note
+palvelin->selain: status 200, HTML
+
+selain->palvelin: GET /main.css
+palvelin->selain: status 200, tyylitiedosto
+
+selain->palvelin: GET /main.js
+palvelin->selain: status 200, JavaScript-tiedosto
+
+selain->palvelin: GET /data.json
+palvelin->selain: status 200, JSON-tiedosto
+
+note left of selain
+ selain näyttää palvelimen palauttaman HTML:n
+ mikä on muotoiltu CSS:llä ja johon on lisätty
+ lomaketoiminnallisuus JS:llä ja jossa on myös 
+ JSON-dataa
+end note
